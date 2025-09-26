@@ -37,22 +37,17 @@ const App = () => {
     setUser(null);
   };
 
-  // const handleLogin = async (event) => {
-  //   event.preventDefault();
-  //   console.log("logging in with", username, password);
-  //   try {
-  //     const user = await loginService.login({
-  //       username,
-  //       password,
-  //     });
-  //     window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
-  //     blogService.setToken(user.token);
-  //     setUsername("");
-  //     setPassword("");
-  //   } catch (exception) {
-  //     console.log("wrong credentials");
-  //   }
-  // };
+  const addBlog = async (blogObject) => {
+    try {
+      const returnedBlog = await blogService.create(blogObject);
+      setBlogs(blogs.concat(returnedBlog));
+    } catch (error) {
+      setErrorMessage("Error creating blog");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
+  };
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -87,7 +82,7 @@ const App = () => {
 
           <div>
             <h2>create new</h2>
-            <CreateBlog createBlog={blogService.create} setBlogs={setBlogs} />
+            <CreateBlog createBlog={addBlog} />
           </div>
           {blogs.map((blog) => (
             <Blog key={blog.id} blog={blog} />
