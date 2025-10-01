@@ -115,10 +115,10 @@ Nesta parte do curso, grande foco é escrever testes automatizados:
 
 Depois de implementar tudo, você pode pensar em:
 
-= Expiração de token: definir expiresIn no jwt.sign(...) para tokens expirarem.
-= Rotas protegidas adicionais (ex: edição, deleção) com checagem de permissões.
-= Refresh token (token de renovação) para melhorar experiência de login.
-= Deploy (Heroku, Vercel, etc.).
-= Documentação da API (Swagger / OpenAPI).
-= Logging mais robusto (morgan + logs de erros).
-= Testes mais abrangentes e cobertura de erros extremos.
+- Expiração de token: definir expiresIn no jwt.sign(...) para tokens expirarem.
+- Rotas protegidas adicionais (ex: edição, deleção) com checagem de permissões.
+- Refresh token (token de renovação) para melhorar experiência de login.
+- Deploy (Heroku, Vercel, etc.).
+- Documentação da API (Swagger / OpenAPI).
+- Logging mais robusto (morgan + logs de erros).
+- Testes mais abrangentes e cobertura de erros extremos.
