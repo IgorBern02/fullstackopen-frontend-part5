@@ -40,7 +40,7 @@ const App = () => {
     setUser(null);
   };
 
-  const BlogForm = async (blogObject) => {
+  const addBlog = async (blogObject) => {
     try {
       const returnedBlog = await blogService.create(blogObject);
       setBlogs(blogs.concat(returnedBlog));
@@ -110,7 +110,7 @@ const App = () => {
       <h2>Blogs</h2>
 
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
-        <CreateBlog createBlog={BlogForm} />
+        <BlogForm createBlog={addBlog} />
       </Togglable>
 
       {blogs.map((blog) => (
