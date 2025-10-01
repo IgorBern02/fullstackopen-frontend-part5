@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export const CreateBlog = ({ createBlog }) => {
+export const BlogForm = ({ createBlog }) => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
 
-  const addBlog = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     createBlog({
       title,
@@ -19,7 +19,7 @@ export const CreateBlog = ({ createBlog }) => {
 
   return (
     <div>
-      <form onSubmit={addBlog}>
+      <form onSubmit={handleSubmit}>
         <div>
           title
           <input
@@ -53,5 +53,3 @@ export const CreateBlog = ({ createBlog }) => {
     </div>
   );
 };
-
-export default CreateBlog;

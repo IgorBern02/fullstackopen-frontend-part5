@@ -3,7 +3,7 @@ import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import Login from "./components/Login";
 import loginService from "./services/login";
-import CreateBlog from "./components/CreateBlog";
+import BlogForm from "./components/BlogForm";
 import Togglable from "./components/Togglable";
 
 const App = () => {
@@ -40,7 +40,7 @@ const App = () => {
     setUser(null);
   };
 
-  const addBlog = async (blogObject) => {
+  const BlogForm = async (blogObject) => {
     try {
       const returnedBlog = await blogService.create(blogObject);
       setBlogs(blogs.concat(returnedBlog));
@@ -110,7 +110,7 @@ const App = () => {
       <h2>Blogs</h2>
 
       <Togglable buttonLabel="new blog" ref={blogFormRef}>
-        <CreateBlog createBlog={addBlog} />
+        <CreateBlog createBlog={BlogForm} />
       </Togglable>
 
       {blogs.map((blog) => (
