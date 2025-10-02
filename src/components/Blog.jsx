@@ -15,12 +15,6 @@ const Blog = ({ blog, onLike, onDelete, user }) => {
     setVisible(!visible);
   };
 
-  // const handleDelete = () => {
-  //   if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)) {
-  //     onDelete(blog.id);
-  //   }
-  // };
-
   return (
     <div style={blogStyle}>
       {blog.title}
