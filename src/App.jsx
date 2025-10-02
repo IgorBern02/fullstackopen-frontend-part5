@@ -96,6 +96,17 @@ const App = () => {
     setBlogs(blogs.map((b) => (b.id === blog.id ? returnedBlog : b)));
   };
 
+  const handleDelete = async (blog) => {
+    if (window.confirm(`Remover ${blog.title} by ${blog.author}?`)) {
+      try {
+        await blogService.remove(blog.id);
+        setBlogs(blogs.filter((b) => b.id !== blog.id));
+      } catch (error) {
+        console.error("Erro ao deletar blog:", error);
+      }
+    }
+  };
+
   const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes);
 
   return (
@@ -132,7 +143,13 @@ const App = () => {
       ))} */}
 
       {sortedBlogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} onLike={handleLike} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          onLike={handleLike}
+          onDelete={handleDelete}
+          user={user}
+        />
       ))}
     </div>
   );
