@@ -24,7 +24,7 @@ const Blog = ({ blog }) => {
 
       {visible && (
         <div>
-          <p>{blog.url}</p>
+          <a href={blog.url}>{blog.url}</a>
           <p>
             {blog.likes} likes <button>like</button>
           </p>
