@@ -47,3 +47,28 @@ test("shows URL and number of likes after clicking the view button", async () =>
   expect(screen.getByText("https://react.dev")).toBeInTheDocument();
   expect(screen.getByText("likes 10")).toBeInTheDocument();
 });
+
+test("button clicked twice, calling twice of component event handle", async () => {
+  const blog = {
+    title: "Aprendendo React",
+    author: "Igor",
+    url: "https://react.dev",
+    likes: 10,
+    user: { username: "igor" },
+  };
+
+  const mockHandler = vi.fn();
+
+  render(<Blog blog={blog} onLike={mockHandler} />);
+
+  const user = userEvent.setup();
+
+  const viewButton = screen.getByText("view");
+  await user.click(viewButton);
+
+  const likeButton = screen.getByText("like");
+  await user.click(likeButton);
+  await user.click(likeButton);
+
+  expect(mockHandler.mock.calls).toHaveLength(2);
+});
