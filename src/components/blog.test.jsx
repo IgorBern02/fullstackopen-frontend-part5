@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Blog from "./Blog";
+import BlogForm from "./BlogForm";
 import { test } from "vitest";
 import userEvent from "@testing-library/user-event";
 
@@ -71,4 +72,34 @@ test("button clicked twice, calling twice of component event handle", async () =
   await user.click(likeButton);
 
   expect(mockHandler.mock.calls).toHaveLength(2);
+});
+
+test("calls event handler with right details when a new blog is created", async () => {
+  const createBlog = vi.fn(); // mock handler
+
+  render(<BlogForm createBlog={createBlog} />);
+
+  const user = userEvent.setup();
+
+  // pega os campos de input pelo placeholder, label ou name (ajuste conforme o seu componente)
+  const titleInput = screen.getByRole("textbox", { name: /title/i });
+  const authorInput = screen.getByRole("textbox", { name: /author/i });
+  const urlInput = screen.getByRole("textbox", { name: /url/i });
+  const sendButton = screen.getByText("create");
+
+  // simula o preenchimento
+  await user.type(titleInput, "Aprendendo React Testing");
+  await user.type(authorInput, "Igor");
+  await user.type(urlInput, "https://react.dev");
+  await user.click(sendButton);
+
+  // verifica se a função foi chamada uma vez
+  expect(createBlog).toHaveBeenCalledTimes(1);
+
+  // verifica se foi chamada com os dados certos
+  expect(createBlog).toHaveBeenCalledWith({
+    title: "Aprendendo React Testing",
+    author: "Igor",
+    url: "https://react.dev",
+  });
 });
